@@ -1,2 +1,7 @@
-./node_modules
-config.ts
+/.idea/
+/node_modules/
+/build/
+/tsconfig.tsbuildinfo
+/config.ts
+/config.d.ts
+/config.js

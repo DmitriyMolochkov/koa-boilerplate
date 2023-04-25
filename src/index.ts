@@ -1,7 +1,8 @@
 import Fastify from 'fastify';
 
+import config from '#config';
+
 import A from './test';
-import config from '../config';
 
 const fastify = Fastify({
   logger: true,
