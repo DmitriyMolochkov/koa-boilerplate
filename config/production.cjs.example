@@ -1,0 +1,14 @@
+/** @type {import("../src/config").ApplicationConfig} */
+const config = {
+  systemConfig: {
+    port: 8085,
+    domain: 'example.com',
+  },
+  dbConfig: {
+    connectionString: '123ruirr',
+  },
+};
+
+module.exports = {
+  config,
+};

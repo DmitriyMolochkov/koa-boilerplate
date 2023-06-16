@@ -3,8 +3,7 @@ import ajvFormats from 'ajv-formats';
 import ajvKeywords from 'ajv-keywords';
 import Fastify from 'fastify';
 
-import config from '#config';
-
+import config from './config';
 import A from './test';
 
 const fastify = Fastify({
@@ -36,7 +35,7 @@ fastify.get('/', () => {
 const start = async() => {
   try {
     A();
-    await fastify.listen({ port: config.port });
+    await fastify.listen({ port: config.systemConfig.port });
   } catch (err) {
     fastify.log.error(err);
   }
