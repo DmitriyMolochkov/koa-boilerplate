@@ -1,0 +1,4 @@
+// typescript config for IDE to work correctly
+{
+  "extends": "../tsconfig.spec.json"
+}
