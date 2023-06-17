@@ -1,5 +1,8 @@
 import {
-  IsInt, Max, Min, ValidationOptions,
+  IsInt,
+  Max,
+  Min,
+  ValidationOptions,
 } from 'class-validator';
 
 export function IsPort(validationOptions?: ValidationOptions) {

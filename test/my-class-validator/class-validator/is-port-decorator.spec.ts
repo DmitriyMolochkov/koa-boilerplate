@@ -1,5 +1,9 @@
 import {
-  IS_INT, IsPort, MAX, MIN, Validator,
+  IS_INT,
+  IsPort,
+  MAX,
+  MIN,
+  Validator,
 } from '#class-validator';
 
 const validator = new Validator();

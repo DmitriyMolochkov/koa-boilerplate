@@ -1,5 +1,8 @@
 import {
-  IsBoolean, IsOptional, Length, ValidateNested,
+  IsBoolean,
+  IsOptional,
+  Length,
+  ValidateNested,
 } from '#class-validator';
 
 import Author from './Author.spec-helper';

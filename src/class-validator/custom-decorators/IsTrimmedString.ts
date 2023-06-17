@@ -1,6 +1,9 @@
 import { Transform, TransformFnParams, TransformOptions } from 'class-transformer';
 import {
-  ValidateBy, ValidationOptions, buildMessage, isString,
+  ValidateBy,
+  ValidationOptions,
+  buildMessage,
+  isString,
 } from 'class-validator';
 
 import CustomDecoratorsName from './CustomDecoratorsName';

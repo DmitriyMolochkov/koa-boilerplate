@@ -1,15 +1,13 @@
 // eslint-disable-next-line max-classes-per-file
 import { JSONSchemaType } from 'ajv';
 
-import {
-  IsNumber,
-  IsString,
-  constructorToJsonSchema,
-} from '#class-validator';
+import { IsNumber, IsString, constructorToJsonSchema } from '#class-validator';
 
 import {
-  ASCII_CYRILLIC_REG_EXP, MAX_PASSWORD_LENGTH,
-  MAX_USERNAME_LENGTH, MIN_PASSWORD_LENGTH,
+  ASCII_CYRILLIC_REG_EXP,
+  MAX_PASSWORD_LENGTH,
+  MAX_USERNAME_LENGTH,
+  MIN_PASSWORD_LENGTH,
   MIN_USERNAME_LENGTH,
   PASSWORD_REG_EXP,
 } from '../constants.spec-helper';

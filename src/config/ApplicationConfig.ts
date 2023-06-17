@@ -1,8 +1,6 @@
 import { Type } from 'class-transformer';
 
-import {
-  IsObject, ValidateNested,
-} from '#class-validator';
+import { IsObject, ValidateNested } from '#class-validator';
 
 import DbConfig from './parts/DbConfig';
 import ServerConfig from './parts/ServerConfig';
