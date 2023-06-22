@@ -9,7 +9,8 @@
   },
   "main": "build/index.js",
   "imports": {
-    "#class-validator": "./src/class-validator"
+    "#class-validator": "./src/class-validator",
+    "#config": "./src/config"
   },
   "scripts": {
     "nodemon": "nodemon",
