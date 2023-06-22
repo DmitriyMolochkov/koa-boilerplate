@@ -3,6 +3,7 @@ import { targetConstructorToSchema } from 'class-validator-jsonschema';
 import { IOptions } from 'class-validator-jsonschema/build/options';
 
 import { CustomDecoratorsName } from '../custom-decorators';
+import { getSchemaIdByTarget, refPointerPrefix } from '../utils';
 
 const transformOperatorsByName = {
   [CustomDecoratorsName.IsTrimmedString]: 'trim',
@@ -29,22 +30,28 @@ function getTransformOperators(metadata: ValidationMetadata, options: IOptions):
 }
 
 export function constructorToJsonSchema(constructor: Constructor) {
-  return targetConstructorToSchema(constructor, {
-    additionalConverters: {
-      [CustomDecoratorsName.IsNullable]: {
-        nullable: true,
+  return {
+    ...targetConstructorToSchema(constructor, {
+      schemaNameField: constructor.name,
+      refPointerPrefix,
+      additionalConverters: {
+        [CustomDecoratorsName.IsNullable]: {
+          nullable: true,
+        },
+        [CustomDecoratorsName.IsTrimmedString]: (meta, opts) => {
+          return {
+            type: 'string',
+            transform: getTransformOperators(meta, opts),
+          };
+        },
+        [CustomDecoratorsName.IsLowercase]: (meta, opts) => {
+          return {
+            transform: getTransformOperators(meta, opts),
+          };
+        },
       },
-      [CustomDecoratorsName.IsTrimmedString]: (meta, opts) => {
-        return {
-          type: 'string',
-          transform: getTransformOperators(meta, opts),
-        };
-      },
-      [CustomDecoratorsName.IsLowercase]: (meta, opts) => {
-        return {
-          transform: getTransformOperators(meta, opts),
-        };
-      },
-    },
-  });
+    }),
+    $id: getSchemaIdByTarget(constructor),
+    additionalProperties: false,
+  };
 }

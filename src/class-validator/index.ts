@@ -49,3 +49,4 @@ export {
 } from 'class-validator';
 export * from './custom-decorators';
 export * from './json-shema';
+export { getMetadataStorage, getSchemaIdByTarget } from './utils';
