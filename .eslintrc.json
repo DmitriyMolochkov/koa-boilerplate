@@ -39,7 +39,11 @@
     "@typescript-eslint/member-delimiter-style": "error",
     "@typescript-eslint/space-before-function-paren": [
       "warn",
-      "never"
+      {
+        "anonymous": "never",
+        "named": "never",
+        "asyncArrow": "always"
+      }
     ],
     "@typescript-eslint/no-empty-interface": [
       "error",
@@ -92,6 +96,15 @@
     "no-console": "off",
     "import/prefer-default-export": "off",
     "@typescript-eslint/no-unused-vars": "off",
+    "@typescript-eslint/require-await": "off",
+    "@typescript-eslint/no-misused-promises": [
+      "error",
+      {
+        "checksVoidReturn": {
+          "arguments": false
+        }
+      }
+    ],
     "import-newlines/enforce": [
       "error",
       {
