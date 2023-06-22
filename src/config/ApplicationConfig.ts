@@ -9,7 +9,7 @@ export default class ApplicationConfig {
   @IsObject()
   @ValidateNested()
   @Type(() => ServerConfig)
-  public readonly systemConfig!: ServerConfig;
+  public readonly serverConfig!: ServerConfig;
 
   @IsObject()
   @ValidateNested()
