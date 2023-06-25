@@ -6,6 +6,7 @@ import { validate } from '#class-validator';
 import ApplicationConfig from './ApplicationConfig';
 
 export { ApplicationConfig };
+export { DbConfig, ServerConfig } from './parts';
 
 const configModel: ApplicationConfig = nodeConfig.get('config');
 const applicationConfig = plainToClass(ApplicationConfig, configModel);

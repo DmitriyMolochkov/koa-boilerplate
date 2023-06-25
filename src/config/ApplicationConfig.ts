@@ -2,8 +2,7 @@ import { Type } from 'class-transformer';
 
 import { IsObject, ValidateNested } from '#class-validator';
 
-import DbConfig from './parts/DbConfig';
-import ServerConfig from './parts/ServerConfig';
+import { DbConfig, ServerConfig } from './parts';
 
 export default class ApplicationConfig {
   @IsObject()
