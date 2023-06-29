@@ -1,8 +1,7 @@
 import Fastify from 'fastify';
 
 import ajvConfig from './ajv-config';
-import jsonSchemas from './plugins/json-shemas';
-import shutdownHandlers from './plugins/shutdown-handlers';
+import { jsonSchemas, shutdownHandlers } from './plugins';
 
 export async function init() {
   const fastify = Fastify({
@@ -11,8 +10,8 @@ export async function init() {
   });
 
   await fastify
-    .register(shutdownHandlers)
-    .register(jsonSchemas);
+    .register(jsonSchemas)
+    .register(shutdownHandlers);
 
   fastify.get('/', () => {
     return { hello: 'world' };
