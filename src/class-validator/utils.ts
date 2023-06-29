@@ -12,7 +12,7 @@ export type MetadataStorage = {
   constraintMetadatas: Map<TargetIdentifier, ConstraintMetadata[]>;
 } & Omit<DefaultMetadataStorage, 'validationMetadatas' | 'constraintMetadatas'>;
 
-export const refPointerPrefix = '#/definitions/';
+export const refPointerPrefix = '/schemas/';
 
 export function getSchemaIdByTarget(target: TargetIdentifier) {
   return `${refPointerPrefix}${typeof target === 'string' ? target : target.name}`;
