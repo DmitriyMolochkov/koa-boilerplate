@@ -16,8 +16,8 @@
   "scripts": {
     "nodemon": "nodemon",
     "prepare": "husky install",
-    "start": "set NODE_ENV=development&& ts-node --preferTsExts src/index.ts",
-    "deploy": "set NODE_ENV=production&&npm run build-js && npm run clean-build && ts-node --swc --preferTsExts src/index.ts",
+    "start": "set NODE_ENV=development&& ts-node src/index.ts",
+    "deploy": "set NODE_ENV=production&&npm run build-js && npm run clean-build && ts-node --swc src/index.ts",
     "build-js": "tsc --build --force tsconfig.json && tsc-alias --project tsconfig.json",
     "clean-build": "rimraf ./build && tsc --build tsconfig.json --clean",
     "start-js": "set NODE_ENV=production&& node --experimental-specifier-resolution=node ./build/index.js",

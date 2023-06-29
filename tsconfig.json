@@ -117,6 +117,7 @@
     "files": true,
     "esm": true,                                         /* enabling ESM for ts-node. */
     "experimentalSpecifierResolution": "node",
+    "preferTsExts": true,
   },
   "exclude": [
     "./build/*",
