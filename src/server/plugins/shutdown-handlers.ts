@@ -6,7 +6,7 @@ const signals = ['SIGTERM', 'SIGINT', 'SIGUSR2'];
 const shutdownHandlers: FastifyPluginAsync = async (server) => {
   const handleSignal = async (signal: string) => {
     signals.forEach((sig) => process.removeListener(sig, handleSignal));
-    console.log('Received shutdown signal:', signal);
+    server.log.info(`Received shutdown signal: ${signal}`);
     await server.close();
 
     process.kill(process.pid, signal);

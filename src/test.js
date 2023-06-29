@@ -1,4 +1,6 @@
+import logger from '#logger';
+
 export default function A() {
-  console.log('Hello world');
+  logger.info('Hello world');
   return 1;
 }

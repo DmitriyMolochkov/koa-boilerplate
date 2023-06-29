@@ -1,6 +1,7 @@
 import 'reflect-metadata';
 
 import { serverConfig } from '#config';
+import logger from '#logger';
 
 import { init } from './server';
 import A from './test';
@@ -11,7 +12,7 @@ const start = async () => {
     const server = await init();
     await server.listen({ port: serverConfig.port });
   } catch (err) {
-    console.error('Error While Starting the Server', err);
+    logger.error(err, 'Error while starting the server');
   }
 };
 

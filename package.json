@@ -10,7 +10,8 @@
   "main": "build/index.js",
   "imports": {
     "#class-validator": "./src/class-validator",
-    "#config": "./src/config"
+    "#config": "./src/config",
+    "#logger": "./src/logger"
   },
   "scripts": {
     "nodemon": "nodemon",
@@ -59,6 +60,8 @@
     "fastify-plugin": "^4.5.0",
     "http-status-code": "^2.1.0",
     "lodash": "^4.17.21",
+    "pino": "^8.14.1",
+    "pino-pretty": "^10.0.0",
     "reflect-metadata": "^0.1.13"
   },
   "devDependencies": {
