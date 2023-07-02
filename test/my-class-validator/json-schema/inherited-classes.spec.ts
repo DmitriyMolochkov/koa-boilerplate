@@ -1,7 +1,13 @@
 // eslint-disable-next-line max-classes-per-file
 import { JSONSchemaType } from 'ajv';
 
-import { IsNumber, IsString, constructorToJsonSchema } from '#class-validator';
+import {
+  IsNullable,
+  IsNumber,
+  IsOptional,
+  IsString,
+  constructorToJsonSchema,
+} from '#class-validator';
 
 import {
   ASCII_CYRILLIC_REG_EXP,
@@ -124,6 +130,93 @@ describe('child class JSON schema', () => {
         },
         password: {
           type: 'string',
+        },
+        sex: {
+          type: 'string',
+          enum: Object.values(UserSex),
+        },
+        email: {
+          type: 'string',
+          nullable: true,
+          format: 'email',
+        },
+      },
+      required: ['password', 'userName', 'sex', 'email'],
+    };
+
+    expect(userUpdateSchema).toEqual(targetSchema);
+  });
+
+  it('should make the field optional and keep the old rules', () => {
+    class UserUpdateModel extends UserCreateModel {
+      @IsOptional()
+      public declare password: string;
+    }
+
+    const userUpdateSchema = constructorToJsonSchema(UserUpdateModel);
+
+    const targetSchema: JSONSchemaType<UserUpdateModel> = {
+      $id: '/schemas/UserUpdateModel',
+      additionalProperties: false,
+      type: 'object',
+      properties: {
+        userName: {
+          type: 'string',
+          transform: ['trim'],
+          pattern: ASCII_CYRILLIC_REG_EXP.source,
+          minLength: MIN_USERNAME_LENGTH,
+          maxLength: MAX_USERNAME_LENGTH,
+
+        },
+        password: {
+          type: 'string',
+          pattern: PASSWORD_REG_EXP.source,
+          minLength: MIN_PASSWORD_LENGTH,
+          maxLength: MAX_PASSWORD_LENGTH,
+        },
+        sex: {
+          type: 'string',
+          enum: Object.values(UserSex),
+        },
+        email: {
+          type: 'string',
+          nullable: true,
+          format: 'email',
+        },
+      },
+      required: ['userName', 'sex', 'email'],
+    };
+
+    expect(userUpdateSchema).toEqual(targetSchema);
+  });
+
+  it('should make the field nullable and keep the old rules', () => {
+    class UserUpdateModel extends UserCreateModel {
+      @IsNullable()
+      public declare password: string;
+    }
+
+    const userUpdateSchema = constructorToJsonSchema(UserUpdateModel);
+
+    const targetSchema: JSONSchemaType<UserUpdateModel> = {
+      $id: '/schemas/UserUpdateModel',
+      additionalProperties: false,
+      type: 'object',
+      properties: {
+        userName: {
+          type: 'string',
+          transform: ['trim'],
+          pattern: ASCII_CYRILLIC_REG_EXP.source,
+          minLength: MIN_USERNAME_LENGTH,
+          maxLength: MAX_USERNAME_LENGTH,
+
+        },
+        password: {
+          type: 'string',
+          nullable: true,
+          pattern: PASSWORD_REG_EXP.source,
+          minLength: MIN_PASSWORD_LENGTH,
+          maxLength: MAX_PASSWORD_LENGTH,
         },
         sex: {
           type: 'string',
