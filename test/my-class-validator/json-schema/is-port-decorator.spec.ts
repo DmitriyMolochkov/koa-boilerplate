@@ -12,6 +12,8 @@ describe('IsPort decorator', () => {
     const portContainerSchema = constructorToJsonSchema(PortContainer);
 
     const targetSchema: JSONSchemaType<PortContainer> = {
+      $id: '/schemas/PortContainer',
+      additionalProperties: false,
       type: 'object',
       properties: {
         port: {

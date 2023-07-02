@@ -21,6 +21,8 @@ describe('child class JSON schema', () => {
     const userUpdateSchema = constructorToJsonSchema(UserUpdateModel);
 
     const targetSchema: JSONSchemaType<UserUpdateModel> = {
+      $id: '/schemas/UserUpdateModel',
+      additionalProperties: false,
       type: 'object',
       properties: {
         userName: {
@@ -62,6 +64,8 @@ describe('child class JSON schema', () => {
     const userUpdateSchema = constructorToJsonSchema(UserUpdateModel);
 
     const targetSchema: JSONSchemaType<UserUpdateModel> = {
+      $id: '/schemas/UserUpdateModel',
+      additionalProperties: false,
       type: 'object',
       properties: {
         id: {
@@ -106,6 +110,8 @@ describe('child class JSON schema', () => {
     const userUpdateSchema = constructorToJsonSchema(UserUpdateModel);
 
     const targetSchema: JSONSchemaType<UserUpdateModel> = {
+      $id: '/schemas/UserUpdateModel',
+      additionalProperties: false,
       type: 'object',
       properties: {
         userName: {

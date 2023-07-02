@@ -17,6 +17,8 @@ describe('IsNullable decorator', () => {
     const userCreateSchema = constructorToJsonSchema(UserCreateModel);
 
     const targetSchema: JSONSchemaType<UserCreateModel> = {
+      $id: '/schemas/UserCreateModel',
+      additionalProperties: false,
       type: 'object',
       properties: {
         userName: {

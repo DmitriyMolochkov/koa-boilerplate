@@ -8,6 +8,8 @@ describe('constructorToJsonSchema', () => {
     const postSchema = constructorToJsonSchema(Post);
 
     expect(postSchema).toEqual({
+      $id: '/schemas/Post',
+      additionalProperties: false,
       type: 'object',
       properties: {
         published: {
@@ -19,7 +21,7 @@ describe('constructorToJsonSchema', () => {
           type: 'string',
         },
         author: {
-          $ref: '#/definitions/Author',
+          $ref: '/schemas/Author',
         },
       },
     });
@@ -27,6 +29,8 @@ describe('constructorToJsonSchema', () => {
     const userSchema = constructorToJsonSchema(Author);
 
     expect(userSchema).toEqual({
+      $id: '/schemas/Author',
+      additionalProperties: false,
       properties: {
         empty: {
           anyOf: [

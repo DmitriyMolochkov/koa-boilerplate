@@ -13,6 +13,8 @@ describe('IsLowercase decorator', () => {
     const stringContainerSchema = constructorToJsonSchema(StringContainer);
 
     const targetSchema: JSONSchemaType<StringContainer> = {
+      $id: '/schemas/StringContainer',
+      additionalProperties: false,
       type: 'object',
       properties: {
         name: {
