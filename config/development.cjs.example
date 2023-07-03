@@ -1,6 +1,6 @@
 /** @type {import("../src/config").ApplicationConfig} */
 const config = {
-  systemConfig: {
+  serverConfig: {
     port: 8087,
     domain: 'example.com',
   },
