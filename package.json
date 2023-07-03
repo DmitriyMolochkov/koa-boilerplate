@@ -54,7 +54,6 @@
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
     "config": "^3.3.9",
-    "dotenv": "^16.0.3",
     "fastify": "^4.15.0",
     "fastify-plugin": "^4.5.0",
     "http-status-code": "^2.1.0",
