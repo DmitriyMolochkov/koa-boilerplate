@@ -105,6 +105,12 @@
         }
       }
     ],
+    "no-param-reassign": [
+      "error",
+      {
+        "props": false
+      }
+    ],
     "import-newlines/enforce": [
       "error",
       {
