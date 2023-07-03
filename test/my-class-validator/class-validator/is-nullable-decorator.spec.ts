@@ -1,4 +1,4 @@
-import { IS_EMAIL, Validator } from '#class-validator';
+import { IS_EMAIL, Validator } from 'class-validator';
 
 import { UserCreateModel, UserSex } from '../models/index.spec-helper';
 

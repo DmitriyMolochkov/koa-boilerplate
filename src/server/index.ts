@@ -3,7 +3,7 @@ import Fastify from 'fastify';
 import logger from '#logger';
 
 import ajvConfig from './ajv-config';
-import { jsonSchemas, shutdownHandlers } from './plugins';
+import { shutdownHandlers } from './plugins';
 
 export async function init() {
   const fastify = Fastify({
@@ -12,7 +12,6 @@ export async function init() {
   });
 
   await fastify
-    .register(jsonSchemas)
     .register(shutdownHandlers);
 
   fastify.get('/', () => {

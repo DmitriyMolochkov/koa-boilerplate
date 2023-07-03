@@ -1,7 +1,6 @@
 import { plainToClass } from 'class-transformer';
+import { validate } from 'class-validator';
 import nodeConfig from 'config';
-
-import { validate } from '#class-validator';
 
 import ApplicationConfig from './ApplicationConfig';
 

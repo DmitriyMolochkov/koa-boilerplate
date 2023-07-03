@@ -1,12 +1,12 @@
 import {
   IsEmail,
   IsEnum,
-  IsNullable,
   IsString,
-  IsTrimmedString,
   Length,
   Matches,
-} from '#class-validator';
+} from 'class-validator';
+
+import { IsNullable, IsTrimmedString } from '#class-validator';
 
 import UserSex from './UserSex.spec-helper';
 import {

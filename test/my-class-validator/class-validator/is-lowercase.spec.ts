@@ -1,11 +1,7 @@
 import { plainToClass } from 'class-transformer';
+import { IsString, Validator } from 'class-validator';
 
-import {
-  CustomDecoratorsName,
-  IsLowercase,
-  IsString,
-  Validator,
-} from '#class-validator';
+import { CustomDecoratorsName, IsLowercase } from '#class-validator';
 
 const validator = new Validator();
 

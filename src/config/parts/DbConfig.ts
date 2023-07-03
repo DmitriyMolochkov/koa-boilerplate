@@ -1,4 +1,4 @@
-import { IsString, Length } from '#class-validator';
+import { IsString, Length } from 'class-validator';
 
 export default class DbConfig {
   @IsString()

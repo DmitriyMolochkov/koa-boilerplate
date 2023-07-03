@@ -1,6 +1,7 @@
 import { plainToClass } from 'class-transformer';
+import { Validator } from 'class-validator';
 
-import { CustomDecoratorsName, IsTrimmedString, Validator } from '#class-validator';
+import { CustomDecoratorsName, IsTrimmedString } from '#class-validator';
 
 const validator = new Validator();
 
