@@ -1,22 +1,19 @@
-import Fastify from 'fastify';
+import cors from '@koa/cors';
+import Koa from 'koa';
+import bodyParser from 'koa-bodyparser';
 
-import logger from '#logger';
-
-import ajvConfig from './ajv-config';
-import { shutdownHandlers } from './plugins';
+import router from './routes';
 
 export async function init() {
-  const fastify = Fastify({
-    logger,
-    ajv: ajvConfig,
-  });
+  const koa = new Koa();
 
-  await fastify
-    .register(shutdownHandlers);
+  koa
+    .use(cors())
+    .use(bodyParser({
+      enableTypes: ['json'],
+      jsonLimit: '10mb',
+    }))
+    .use(router.routes());
 
-  fastify.get('/', () => {
-    return { hello: 'world' };
-  });
-
-  return fastify;
+  return koa;
 }
