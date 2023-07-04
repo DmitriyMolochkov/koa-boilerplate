@@ -1,9 +1,14 @@
 import { Type } from 'class-transformer';
-import { IsObject, ValidateNested } from 'class-validator';
+import { IsEnum, IsObject, ValidateNested } from 'class-validator';
+
+import { Environment } from '#constants';
 
 import { DbConfig, ServerConfig } from './parts';
 
 export default class ApplicationConfig {
+  @IsEnum(Environment)
+  public readonly nodeEnv!: Environment;
+
   @IsObject()
   @ValidateNested()
   @Type(() => ServerConfig)
