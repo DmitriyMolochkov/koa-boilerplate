@@ -11,6 +11,7 @@
   "imports": {
     "#class-validator": "./src/class-validator",
     "#config": "./src/config",
+    "#constants": "./src/constants",
     "#logger": "./src/logger"
   },
   "scripts": {
