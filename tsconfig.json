@@ -33,6 +33,7 @@
       "#class-validator": ["./src/class-validator"],
       "#config": ["./src/config"],
       "#constants": ["./src/constants"],
+      "#database": ["./src/database"],
       "#logger": ["./src/logger"]
     },
     // "rootDirs": ["src"],                              /* Allow multiple folders to be treated as one when resolving modules. */

@@ -1,11 +1,16 @@
-/** @type {Omit<import("../src/config").ApplicationConfig, 'nodeEnv' | 'isProduction'>} */
+/** @type {Omit<import("../src/config").ApplicationConfig, 'nodeEnv' |'isProduction'>} */
 const config = {
   serverConfig: {
     port: 8085,
     domain: 'example.com',
   },
   dbConfig: {
-    connectionString: '123ruirr',
+    type: 'postgres',
+    host: 'localhost',
+    port: 5432,
+    username: 'postgres',
+    password: 'postgres',
+    database: 'koa-boilerplate',
   },
 };
 

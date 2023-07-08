@@ -170,5 +170,13 @@
       "typescript": true,
       "node": true
     }
-  }
+  },
+  "overrides": [
+    {
+      "files": ["./src/database/migrations/**"],
+      "rules": {
+        "class-methods-use-this": "off"
+      }
+    }
+  ]
 }
