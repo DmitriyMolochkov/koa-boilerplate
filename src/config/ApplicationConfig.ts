@@ -18,4 +18,8 @@ export default class ApplicationConfig {
   @ValidateNested()
   @Type(() => DbConfig)
   public readonly dbConfig!: DbConfig;
+
+  public get isProduction() {
+    return this.nodeEnv === Environment.Production;
+  }
 }

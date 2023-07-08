@@ -1,4 +1,4 @@
-/** @type {Omit<import("../src/config").ApplicationConfig, 'nodeEnv'>} */
+/** @type {Omit<import("../src/config").ApplicationConfig, 'nodeEnv' | 'isProduction'>} */
 const config = {
   serverConfig: {
     port: 8080,
