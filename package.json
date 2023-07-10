@@ -13,7 +13,8 @@
     "#config": "./src/config",
     "#constants": "./src/constants",
     "#database": "./src/database",
-    "#logger": "./src/logger"
+    "#logger": "./src/logger",
+    "#mixins": "./src/mixins"
   },
   "scripts": {
     "nodemon": "nodemon",
