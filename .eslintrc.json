@@ -65,6 +65,12 @@
         "ignoreExpressions": true
       }
     ],
+    "@typescript-eslint/unbound-method": [
+      "error",
+      {
+        "ignoreStatic": true
+      }
+    ],
     "no-trailing-spaces": [
       "error",
       {
