@@ -3,7 +3,7 @@ import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConne
 
 import { IsPort } from '#class-validator';
 
-export default class DbConfig {
+export class DbConfig {
   @IsString()
   public readonly type!: PostgresConnectionOptions['type'];
 

@@ -1,7 +1,2 @@
-import DbConfig from './DbConfig';
-import ServerConfig from './ServerConfig';
-
-export {
-  DbConfig,
-  ServerConfig,
-};
+export * from './DbConfig';
+export * from './ServerConfig';
