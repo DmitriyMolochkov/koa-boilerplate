@@ -66,8 +66,6 @@
     "class-validator": "^0.14.0",
     "config": "^3.3.9",
     "dotenv": "^16.3.1",
-    "fastify": "^4.15.0",
-    "fastify-plugin": "^4.5.0",
     "http-status-codes": "^2.1.0",
     "install": "^0.13.0",
     "koa": "^2.14.2",
