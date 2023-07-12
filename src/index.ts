@@ -1,4 +1,5 @@
 import 'reflect-metadata';
+import 'dotenv/config';
 
 import { serverConfig } from '#config';
 import { DataSource } from '#database';
