@@ -14,7 +14,8 @@
     "#constants": "./src/constants",
     "#database": "./src/database",
     "#logger": "./src/logger",
-    "#mixins": "./src/mixins"
+    "#mixins": "./src/mixins",
+    "#utils": "./src/utils"
   },
   "scripts": {
     "nodemon": "nodemon",

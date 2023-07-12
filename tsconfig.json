@@ -35,7 +35,8 @@
       "#constants": ["./src/constants"],
       "#database": ["./src/database"],
       "#logger": ["./src/logger"],
-      "#mixins": ["./src/mixins"]
+      "#mixins": ["./src/mixins"],
+      "#utils": ["./src/utils"]
     },
     // "rootDirs": ["src"],                              /* Allow multiple folders to be treated as one when resolving modules. */
     "typeRoots" : [                                      /* Specify multiple folders that act like './node_modules/@types'. */
