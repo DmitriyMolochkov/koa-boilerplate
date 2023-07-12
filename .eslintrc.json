@@ -99,7 +99,6 @@
     "arrow-body-style": "off",
     "linebreak-style": "off",
     "no-plusplus": "off",
-    "no-console": "off",
     "import/prefer-default-export": "off",
     "@typescript-eslint/no-unused-vars": "off",
     "@typescript-eslint/require-await": "off",
