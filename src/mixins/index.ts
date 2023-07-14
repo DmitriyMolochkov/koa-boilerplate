@@ -1,5 +1,2 @@
-import ViewMixin from './ViewMixin';
-
-export {
-  ViewMixin,
-};
+export * from './PaginationMixin';
+export * from './ViewMixin';
