@@ -26,7 +26,7 @@
     "clean-build": "rimraf ./build && tsc --build tsconfig.json --clean",
     "start-js": "node --experimental-specifier-resolution=node ./build/index.js",
     "test-spec": "jest --config jest.spec.config.ts",
-    "migration:generate": "typeorm-ts-node-esm -d ./src/database/data-source.ts migration:generate ./src/database/migrations/%npm_config_name%",
+    "migration:generate": "cross-env-shell \"typeorm-ts-node-esm -d ./src/database/data-source.ts migration:generate ./src/database/migrations/$npm_config_name\"",
     "migration:run": "typeorm-ts-node-esm -d ./src/database/data-source.ts migration:run",
     "migration:run-js": "node --experimental-specifier-resolution=node ./node_modules/typeorm/cli -d ./build/database/data-source.js migration:run",
     "migration:revert": "typeorm-ts-node-esm -d ./src/database/data-source.ts migration:revert"
@@ -91,6 +91,7 @@
     "@types/node": "^18.15.13",
     "@typescript-eslint/eslint-plugin": "^5.57.1",
     "@typescript-eslint/parser": "^5.57.1",
+    "cross-env": "^7.0.3",
     "eslint": "^8.39.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-airbnb-typescript": "^17.0.0",
