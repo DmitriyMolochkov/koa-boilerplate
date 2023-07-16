@@ -23,3 +23,6 @@ const pinoConfig = pinoConfigsObj[config.nodeEnv];
 const logger = pino(pinoConfig);
 
 export default logger;
+
+export * from './decocators';
+export * from './constants';
