@@ -31,7 +31,7 @@ export default function onShutdown(server: Server) {
   signals.forEach((signal: string) => process.on(signal, handleSignal));
 
   process.on('uncaughtException', async (error) => {
-    logger.error(error, 'Uncaught exception');
+    logger.fatal(error, 'Uncaught exception');
 
     await shutdownServer(server);
 
@@ -39,7 +39,7 @@ export default function onShutdown(server: Server) {
   });
 
   process.on('unhandledRejection', async (error) => {
-    logger.error(error, 'Unhandled promise rejection');
+    logger.fatal(error, 'Unhandled promise rejection');
 
     await shutdownServer(server);
 
