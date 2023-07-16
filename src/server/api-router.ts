@@ -13,12 +13,6 @@ apiRouter.use(serverErrorHandler);
 apiRouter.use(commonErrorHandler);
 
 // routes
-apiRouter.get('/', (ctx) => {
-  ctx.body = {
-    hello: 'world',
-  };
-});
-
 apiRouter.use(healthRouter.routes());
 apiRouter.use(noteRoutes.routes());
 
