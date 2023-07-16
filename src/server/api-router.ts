@@ -3,13 +3,14 @@ import Router from '@koa/router';
 import healthRouter from '#modules/health/router';
 import noteRoutes from '#modules/notes/router';
 
-import { httpLogger, serverErrorHandler } from './middlewares';
+import { commonErrorHandler, httpLogger, serverErrorHandler } from './middlewares';
 
 const apiRouter = new Router({ prefix: '/api' });
 
 // middlewares
 apiRouter.use(httpLogger);
 apiRouter.use(serverErrorHandler);
+apiRouter.use(commonErrorHandler);
 
 // routes
 apiRouter.get('/', (ctx) => {

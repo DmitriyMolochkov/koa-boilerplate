@@ -1,12 +1,14 @@
+import 'reflect-metadata';
+import 'dotenv/config';
 import path from 'path';
-import { fileURLToPath } from 'url';
 
 import { DataSource } from 'typeorm';
 
 import config, { dbConfig } from '#config';
+import { rootDir } from '#utils';
 
-const currentDirName = path.dirname(fileURLToPath(import.meta.url));
-const migrationPath = path.join(currentDirName, 'migrations', '*{.ts,.js}');
+const migrationPath = path.join(rootDir, 'database', 'migrations', '*{.ts,.js}');
+const entitiesPath = path.join(rootDir, 'modules', '*', 'entities', '*{.ts,.js}');
 
 export default new DataSource({
   type: dbConfig.type,
@@ -17,7 +19,7 @@ export default new DataSource({
   database: dbConfig.database,
   synchronize: false,
   logging: !config.isProduction,
-  entities: [],
+  entities: [entitiesPath],
   subscribers: [],
   migrations: [migrationPath],
 });

@@ -36,6 +36,7 @@
       "#database": ["./src/database"],
       "#logger": ["./src/logger"],
       "#mixins": ["./src/mixins"],
+      "#modules/*": ["./src/modules/*"],
       "#utils": ["./src/utils"]
     },
     // "rootDirs": ["src"],                              /* Allow multiple folders to be treated as one when resolving modules. */

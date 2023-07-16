@@ -182,6 +182,18 @@
       "rules": {
         "class-methods-use-this": "off"
       }
+    },
+    {
+      "files": ["**View.ts"],
+      "rules": {
+        "max-classes-per-file": [
+          "error",
+          {
+            "max": 2,
+            "ignoreExpressions": true
+          }
+        ]
+      }
     }
   ]
 }
