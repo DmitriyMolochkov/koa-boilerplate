@@ -2,7 +2,7 @@ import cors from '@koa/cors';
 import Koa from 'koa';
 import bodyParser from 'koa-bodyparser';
 
-import router from './routes';
+import apiRouter from './api-router';
 
 export async function init() {
   const koa = new Koa();
@@ -13,7 +13,7 @@ export async function init() {
       enableTypes: ['json'],
       jsonLimit: '10mb',
     }))
-    .use(router.routes());
+    .use(apiRouter.routes());
 
   return koa;
 }
