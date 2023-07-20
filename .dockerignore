@@ -1,0 +1,7 @@
+/.idea/
+/.husky/_/
+/node_modules/
+/build/
+/config
+/tsconfig.tsbuildinfo
+/.env

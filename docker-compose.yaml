@@ -1,0 +1,11 @@
+version: '3.7'
+
+services :
+  server:
+    build:
+      args:
+        node_env: "production"
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./config:/app/config
