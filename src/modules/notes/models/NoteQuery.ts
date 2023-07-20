@@ -15,7 +15,7 @@ import { NoteStatus } from '#modules/notes/enums';
 export class NoteQuery extends BaseQuery {
   @IsOptional()
   @IsTrimmedString()
-  readonly searchString?: string;
+  public readonly searchString?: string;
 
   @IsOptional()
   @IsArray()
@@ -24,15 +24,15 @@ export class NoteQuery extends BaseQuery {
     each: true,
   })
   @Transform(({ value }: { value: NoteStatus | NoteStatus[] }) => castArray(value))
-  readonly statuses?: NoteStatus[];
+  public readonly statuses?: NoteStatus[];
 
   @IsOptional()
   @IsDate()
   @Type(() => Date)
-  public startDate?: Date;
+  public readonly startDate?: Date;
 
   @IsOptional()
   @IsDate()
   @Type(() => Date)
-  public endDate?: Date;
+  public readonly endDate?: Date;
 }

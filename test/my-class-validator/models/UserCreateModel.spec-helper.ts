@@ -22,19 +22,19 @@ export default class UserCreateModel {
   @IsTrimmedString()
   @Matches(ASCII_CYRILLIC_REG_EXP)
   @Length(MIN_USERNAME_LENGTH, MAX_USERNAME_LENGTH)
-  readonly userName: string;
+  public readonly userName: string;
 
   @IsString()
   @Matches(PASSWORD_REG_EXP)
   @Length(MIN_PASSWORD_LENGTH, MAX_PASSWORD_LENGTH)
-  readonly password: string;
+  public readonly password: string;
 
   @IsEnum(UserSex)
-  readonly sex: UserSex;
+  public readonly sex: UserSex;
 
   @IsEmail()
   @IsNullable()
-  readonly email: string | null;
+  public readonly email: string | null;
 
   constructor(userName: string, password: string, sex: UserSex, email: string | null) {
     this.userName = userName;
