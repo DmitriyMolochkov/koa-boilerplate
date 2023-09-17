@@ -53,13 +53,17 @@ export async function create(ctx: KoaContext<NoteCreateModel, NoteView>) {
 }
 
 export async function update(ctx: KoaContext<NoteUpdateModel, NoteView, IdParam>) {
-  const note = await NoteService.update(ctx.params.id, ctx.request.body);
+  const note = await NoteService.getById(ctx.params.id);
+
+  await NoteService.update(note, ctx.request.body);
 
   ctx.body = new NoteView(note);
 }
 
 export async function patch(ctx: KoaContext<Partial<NotePatchModel>, NoteView, IdParam>) {
-  const note = await NoteService.update(ctx.params.id, ctx.request.body);
+  const note = await NoteService.getById(ctx.params.id);
+
+  await NoteService.update(note, ctx.request.body);
 
   ctx.body = new NoteView(note);
 }
@@ -71,8 +75,10 @@ export async function remove(ctx: KoaContext<object, undefined, IdParam>) {
 }
 
 export async function activate(ctx: KoaContext<object, NoteView, IdParam>) {
-  const note = await NoteService.changeStatus(
-    ctx.params.id,
+  const note = await NoteService.getById(ctx.params.id);
+
+  await NoteService.changeStatus(
+    note,
     NoteStatus.active,
     [NoteStatus.inactive],
   );
@@ -81,8 +87,10 @@ export async function activate(ctx: KoaContext<object, NoteView, IdParam>) {
 }
 
 export async function deactivate(ctx: KoaContext<object, NoteView, IdParam>) {
-  const note = await NoteService.changeStatus(
-    ctx.params.id,
+  const note = await NoteService.getById(ctx.params.id);
+
+  await NoteService.changeStatus(
+    note,
     NoteStatus.inactive,
     [NoteStatus.active],
   );

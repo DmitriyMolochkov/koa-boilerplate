@@ -8,6 +8,7 @@ import {
   Not,
 } from 'typeorm';
 
+import logger from '#logger';
 import {
   AccessError,
   DuplicationError,
@@ -15,7 +16,7 @@ import {
 } from '#modules/common/errors/business-errors';
 import Note from '#modules/notes/entities/Note';
 import { NoteStatus } from '#modules/notes/enums';
-import { ExampleNoteError } from '#modules/notes/error/business-errors/ExampleNoteError';
+import { ExampleNoteError } from '#modules/notes/error/business-errors';
 import {
   NoteCreateModel,
   NotePatchModel,
@@ -86,19 +87,15 @@ export async function create(createModel: NoteCreateModel) {
   });
   await note.save();
 
+  logger.info({ id: note.id }, `${Note.name} created`);
+
   return note;
 }
 
 export async function update(
-  id: Note['id'],
+  note: Note,
   updateModel: NoteUpdateModel | Partial<NotePatchModel>,
 ) {
-  const note = await Note.findOneBy({ id });
-
-  if (!note) {
-    throw new NoteNotFindError(id);
-  }
-
   if (note.status === NoteStatus.expired) {
     throw new NoteAccessError(
       note.id,
@@ -107,7 +104,7 @@ export async function update(
   }
 
   if (updateModel.title) {
-    const existNote = await Note.findOneBy({ id: Not(id), title: updateModel.title });
+    const existNote = await Note.findOneBy({ id: Not(note.id), title: updateModel.title });
     if (existNote) {
       throw new NoteDuplicationError(['title']);
     }
@@ -115,6 +112,8 @@ export async function update(
 
   Note.merge(note, { ...updateModel });
   await note.save();
+
+  logger.info({ id: note.id }, `${Note.name} updated`);
 
   return note;
 }
@@ -127,20 +126,18 @@ export async function remove(id: Note['id']) {
   }
 
   await note.remove();
+
+  logger.info({ id }, `${Note.name} removed`);
 }
 
 export async function changeStatus(
-  id: Note['id'],
+  note: Note,
   status: NoteStatus,
   acceptableStatuses?: NoteStatus[],
 ) {
-  const note = await Note.findOneBy({ id });
+  const previousStatus = note.status;
 
-  if (!note) {
-    throw new NoteNotFindError(id);
-  }
-
-  if (acceptableStatuses && !acceptableStatuses.includes(note.status)) {
+  if (acceptableStatuses && !acceptableStatuses.includes(previousStatus)) {
     throw new NoteAccessError(
       note.id,
       `Note record is in invalid status '${note.status}'.`
@@ -151,7 +148,31 @@ export async function changeStatus(
   note.status = status;
   await note.save();
 
+  logger.info(
+    {
+      id: note.id,
+      previousStatus,
+      newState: note.status,
+    },
+    `${Note.name} status updated`,
+  );
+
   return note;
+}
+
+export async function expireNote(note: Note) {
+  note.text = note.text.replace(/\p{L}/gu, '*');
+
+  await changeStatus(
+    note,
+    NoteStatus.expired,
+    [
+      NoteStatus.active,
+      NoteStatus.inactive,
+    ],
+  );
+
+  logger.info({ id: note.id }, 'Note expired');
 }
 
 export async function exampleError(id: Note['id']) {
