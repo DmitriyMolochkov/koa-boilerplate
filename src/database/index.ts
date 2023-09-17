@@ -5,8 +5,9 @@ import DataSource from './data-source';
 async function initialize() {
   try {
     await DataSource.initialize();
-  } catch (err) {
-    logger.error(err, 'Error while initializing database');
+    logger.info('Database initialized');
+  } catch (error) {
+    logger.error(error, 'Error while initializing database');
   }
 }
 

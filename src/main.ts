@@ -21,8 +21,8 @@ export default async function start() {
         onShutdown(server);
       },
     );
-  } catch (err) {
-    logger.error(err, 'Error while starting the server');
+  } catch (error) {
+    logger.error(error, 'Error while starting the server');
     process.exitCode = 1;
   }
 }

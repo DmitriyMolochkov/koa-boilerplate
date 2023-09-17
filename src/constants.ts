@@ -1,6 +1,6 @@
 export enum Environment {
-  Development = 'development',
-  Production = 'production',
+  development = 'development',
+  production = 'production',
 }
 export const ASCII_REG_EXP = /^[ -~]+$/g;
 export const ASCII_CYRILLIC_REG_EXP = /^[ -~№А-яЁё]+$/g;

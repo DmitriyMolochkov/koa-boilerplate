@@ -13,8 +13,8 @@ type ResponseRawWrapper<T> = T & { raw: { locals: T } };
 
 const loggerInstance = pinoHttp({
   logger,
-  customLogLevel(req, res, err) {
-    if (res.statusCode >= 500 || err) {
+  customLogLevel(req, res, error) {
+    if (res.statusCode >= 500 || error) {
       return 'error';
     }
     if (res.statusCode >= 400) {

@@ -20,6 +20,6 @@ export default class ApplicationConfig {
   public readonly dbConfig!: DbConfig;
 
   public get isProduction() {
-    return this.nodeEnv === Environment.Production;
+    return this.nodeEnv === Environment.production;
   }
 }
