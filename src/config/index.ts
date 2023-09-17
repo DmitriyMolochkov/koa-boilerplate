@@ -27,6 +27,7 @@ if (errors.length > 0) {
 
 export default applicationConfig;
 export const {
-  serverConfig,
   dbConfig,
+  redisConfig,
+  serverConfig,
 } = applicationConfig;

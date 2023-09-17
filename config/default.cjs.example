@@ -12,6 +12,10 @@ const config = {
     password: 'postgres',
     database: 'koa-boilerplate',
   },
+  redisConfig: {
+    host: 'localhost',
+    port: 6379,
+  },
 };
 
 module.exports = {

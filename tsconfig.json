@@ -37,6 +37,7 @@
       "#logger": ["./src/logger"],
       "#mixins": ["./src/mixins"],
       "#modules/*": ["./src/modules/*"],
+      "#redis": ["./src/redis"],
       "#utils": ["./src/utils"]
     },
     // "rootDirs": ["src"],                              /* Allow multiple folders to be treated as one when resolving modules. */

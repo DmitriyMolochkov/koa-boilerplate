@@ -1,6 +1,7 @@
 import { serverConfig } from '#config';
 import { DataSource } from '#database';
 import logger from '#logger';
+import redis from '#redis';
 
 import { init } from './server';
 import onShutdown from './server/on-shutdown';
@@ -9,6 +10,10 @@ export default async function start() {
   try {
     if (!DataSource.isInitialized) {
       throw new Error('Database not initialized');
+    }
+
+    if (redis.status !== 'ready') {
+      throw new Error('Redis is not ready');
     }
 
     const koa = await init();

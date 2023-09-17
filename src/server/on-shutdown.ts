@@ -3,12 +3,18 @@ import * as util from 'util';
 
 import { DataSource } from '#database';
 import logger from '#logger';
+import redis from '#redis';
 
 const signals = ['SIGTERM', 'SIGINT', 'SIGUSR2'];
 
 async function shutdownServer(server: Server) {
   try {
     await util.promisify(server.close.bind(server))();
+
+    const isRedisReady = redis.status === 'ready';
+    if (isRedisReady) {
+      await redis.quit();
+    }
 
     if (DataSource.isInitialized) {
       await DataSource.destroy();

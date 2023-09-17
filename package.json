@@ -16,6 +16,7 @@
     "#logger": "./src/logger",
     "#mixins": "./src/mixins",
     "#modules/*": "./src/modules/*",
+    "#redis": "./src/redis",
     "#utils": "./src/utils"
   },
   "scripts": {
@@ -65,6 +66,7 @@
     "dotenv": "^16.3.1",
     "http-status-codes": "^2.1.0",
     "install": "^0.13.0",
+    "ioredis": "^5.3.2",
     "koa": "^2.14.2",
     "koa-bodyparser": "^4.4.1",
     "lodash-es": "^4.17.21",
@@ -87,6 +89,7 @@
     "@types/lint-staged": "^13.2.0",
     "@types/lodash-es": "^4.17.8",
     "@types/node": "^18.15.13",
+    "@types/redis-info": "^3.0.0",
     "@typescript-eslint/eslint-plugin": "^5.57.1",
     "@typescript-eslint/parser": "^5.57.1",
     "cross-env": "^7.0.3",
