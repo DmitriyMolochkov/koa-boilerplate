@@ -6,5 +6,10 @@
   "exclude": [
     "./build",
     "./config/*"
-  ]
+  ],
+  "ts-node": {
+     "moduleTypes": {
+      "jest.spec.config.ts": "cjs"
+    }
+  }
 }

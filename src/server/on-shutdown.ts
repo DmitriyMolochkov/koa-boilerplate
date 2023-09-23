@@ -2,6 +2,7 @@ import { Server } from 'http';
 import * as util from 'util';
 
 import { DataSource } from '#database';
+import jobQueue from '#job-queue';
 import logger from '#logger';
 import redis from '#redis';
 
@@ -12,6 +13,9 @@ async function shutdownServer(server: Server) {
     await util.promisify(server.close.bind(server))();
 
     const isRedisReady = redis.status === 'ready';
+
+    await jobQueue.terminate(!isRedisReady);
+
     if (isRedisReady) {
       await redis.quit();
     }

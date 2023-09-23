@@ -17,6 +17,8 @@ import {
 import Note from '#modules/notes/entities/Note';
 import { NoteStatus } from '#modules/notes/enums';
 import { ExampleNoteError } from '#modules/notes/error/business-errors';
+// eslint-disable-next-line import/no-cycle
+import { addNoteExpireJob, removeNoteExpireJobs } from '#modules/notes/jobs/expire-note';
 import {
   NoteCreateModel,
   NotePatchModel,
@@ -24,6 +26,7 @@ import {
   NoteUpdateModel,
 } from '#modules/notes/models';
 import { NoteQueryByPage } from '#modules/notes/models/NoteQueryByPage';
+import { isNoteNearExpiration } from '#modules/notes/utils';
 
 const NoteAccessError = AccessError.bind(undefined, Note.name);
 const NoteDuplicationError = (DuplicationError<Note>).bind(undefined, Note.name);
@@ -89,6 +92,10 @@ export async function create(createModel: NoteCreateModel) {
 
   logger.info({ id: note.id }, `${Note.name} created`);
 
+  if (isNoteNearExpiration(note)) {
+    await addNoteExpireJob(note);
+  }
+
   return note;
 }
 
@@ -115,6 +122,11 @@ export async function update(
 
   logger.info({ id: note.id }, `${Note.name} updated`);
 
+  await removeNoteExpireJobs(note.id);
+  if (isNoteNearExpiration(note)) {
+    await addNoteExpireJob(note);
+  }
+
   return note;
 }
 
@@ -128,6 +140,8 @@ export async function remove(id: Note['id']) {
   await note.remove();
 
   logger.info({ id }, `${Note.name} removed`);
+
+  await removeNoteExpireJobs(id);
 }
 
 export async function changeStatus(

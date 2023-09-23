@@ -2,7 +2,7 @@
 ## Motivation
 Have a template for quick start backend REST API applications.
 
-Stack: typescript, koa, typeorm, class-validator, pino, jest.
+Stack: typescript, koa, typeorm, class-validator, pino, jest, redis, bullmq.
 
 ## Features:
 - configured to build js files as ES modules
@@ -12,6 +12,7 @@ Stack: typescript, koa, typeorm, class-validator, pino, jest.
 - pino - logging of any place, including automatic logging of http requests with the ability to hide sensitive/secret information
 - detailed typing of koa controllers
 - handling business errors in endpoints
+- bullmq - fast and robust queue system built on top of Redis
 - using mixins to create reusable classes and to eliminate duplicate code
 - implementation of the server health check API according to RFC: https://inadarei.github.io/rfc-healthcheck/
 - graceful shutdown of the server

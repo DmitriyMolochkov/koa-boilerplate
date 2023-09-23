@@ -1,6 +1,8 @@
 import { serverConfig } from '#config';
 import { DataSource } from '#database';
+import jobQueue from '#job-queue';
 import logger from '#logger';
+import { jobQueueManager } from '#managers';
 import redis from '#redis';
 
 import { init } from './server';
@@ -15,6 +17,13 @@ export default async function start() {
     if (redis.status !== 'ready') {
       throw new Error('Redis is not ready');
     }
+
+    await jobQueueManager.init();
+    jobQueue.start()
+      .catch((error) => {
+        logger.error(error, 'Error in job queue');
+        process.exit(-1);
+      });
 
     const koa = await init();
     const server = koa.listen(

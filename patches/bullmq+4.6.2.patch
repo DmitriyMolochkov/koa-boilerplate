@@ -1,0 +1,42 @@
+diff --git a/node_modules/bullmq/dist/cjs/classes/child-processor.js b/node_modules/bullmq/dist/cjs/classes/child-processor.js
+index 627c0af..75541dc 100644
+--- a/node_modules/bullmq/dist/cjs/classes/child-processor.js
++++ b/node_modules/bullmq/dist/cjs/classes/child-processor.js
+@@ -25,7 +25,7 @@ class ChildProcessor {
+     async init(processorFile) {
+         let processor;
+         try {
+-            processor = require(processorFile);
++            processor = await import(processorFile);
+             if (processor.default) {
+                 // support es2015 module.
+                 processor = processor.default;
+diff --git a/node_modules/bullmq/dist/cjs/classes/worker.js b/node_modules/bullmq/dist/cjs/classes/worker.js
+index 42ab0cd..b942874 100644
+--- a/node_modules/bullmq/dist/cjs/classes/worker.js
++++ b/node_modules/bullmq/dist/cjs/classes/worker.js
+@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
+ exports.Worker = void 0;
+ const fs = require("fs");
+ const path = require("path");
++const url = require("url");
+ const uuid_1 = require("uuid");
+ const utils_1 = require("../utils");
+ const queue_base_1 = require("./queue-base");
+@@ -50,11 +51,13 @@ class Worker extends queue_base_1.QueueBase {
+             }
+             else {
+                 // SANDBOXED
+-                const supportedFileTypes = ['.js', '.ts', '.flow', '.cjs'];
++                const supportedFileTypes = ['.js', '.ts', '.flow', '.cjs', '.mjs'];
+                 const processorFile = processor +
+                     (supportedFileTypes.includes(path.extname(processor)) ? '' : '.js');
+-                if (!fs.existsSync(processorFile)) {
+-                    throw new Error(`File ${processorFile} does not exist`);
++
++                const processorFilePath = url.fileURLToPath(processorFile);
++                if (!fs.existsSync(processorFilePath)) {
++                    throw new Error(`File ${processorFilePath} does not exist`);
+                 }
+                 const mainFile = this.opts.useWorkerThreads
+                     ? 'main-worker.js'
