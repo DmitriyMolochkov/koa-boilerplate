@@ -13,7 +13,7 @@ Stack: typescript, koa, typeorm, class-validator, pino, jest, redis, bullmq.
 - detailed typing of koa controllers
 - handling business errors in endpoints
 - bullmq - fast and robust queue system built on top of Redis
-- message bus - efficient and reliable queuing and message delivery on top of Redis Streams and Consumer Groups.
+- message bus - efficient and reliable queuing and message delivery on top of Redis Streams and Consumer Groups
 - using mixins to create reusable classes and to eliminate duplicate code
 - implementation of the server health check API according to RFC: https://inadarei.github.io/rfc-healthcheck/
 - graceful shutdown of the server
