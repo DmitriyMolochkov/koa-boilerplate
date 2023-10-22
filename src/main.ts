@@ -1,7 +1,7 @@
 import { serverConfig } from '#config';
 import { DataSource } from '#database';
 import logger from '#logger';
-import { jobQueueManager } from '#managers';
+import { jobQueueManager, messageListenerManager } from '#managers';
 import redis from '#redis';
 
 import { init } from './server';
@@ -17,7 +17,14 @@ export default async function start() {
       throw new Error('Redis is not ready');
     }
 
+    await messageListenerManager.init();
     await jobQueueManager.init();
+
+    messageListenerManager.start()
+      .catch((error) => {
+        logger.error(error, 'Error in message listener');
+        process.exit(-1);
+      });
 
     jobQueueManager.start()
       .catch((error) => {

@@ -9,6 +9,7 @@ import {
 } from 'typeorm';
 
 import logger from '#logger';
+import messageBus from '#message-bus';
 import {
   AccessError,
   DuplicationError,
@@ -17,8 +18,13 @@ import {
 import Note from '#modules/notes/entities/Note';
 import { NoteStatus } from '#modules/notes/enums';
 import { ExampleNoteError } from '#modules/notes/error/business-errors';
-// eslint-disable-next-line import/no-cycle
-import { addNoteExpireJob, removeNoteExpireJobs } from '#modules/notes/jobs/expire-note';
+import {
+  NoteCreatedMessage,
+  NoteExpiredMessage,
+  NoteRemovedMessage,
+  NoteStatusChangedMessage,
+  NoteUpdatedMessage,
+} from '#modules/notes/messages';
 import {
   NoteCreateModel,
   NotePatchModel,
@@ -26,7 +32,6 @@ import {
   NoteUpdateModel,
 } from '#modules/notes/models';
 import { NoteQueryByPage } from '#modules/notes/models/NoteQueryByPage';
-import { isNoteNearExpiration } from '#modules/notes/utils';
 
 const NoteAccessError = AccessError.bind(undefined, Note.name);
 const NoteDuplicationError = (DuplicationError<Note>).bind(undefined, Note.name);
@@ -92,9 +97,7 @@ export async function create(createModel: NoteCreateModel) {
 
   logger.info({ id: note.id }, `${Note.name} created`);
 
-  if (isNoteNearExpiration(note)) {
-    await addNoteExpireJob(note);
-  }
+  await messageBus.addMessage(new NoteCreatedMessage(note));
 
   return note;
 }
@@ -117,15 +120,19 @@ export async function update(
     }
   }
 
+  const previousFields = {
+    title: note.title,
+    description: note.description,
+    expirationDate: note.expirationDate,
+    text: note.text,
+  };
+
   Note.merge(note, { ...updateModel });
   await note.save();
 
   logger.info({ id: note.id }, `${Note.name} updated`);
 
-  await removeNoteExpireJobs(note.id);
-  if (isNoteNearExpiration(note)) {
-    await addNoteExpireJob(note);
-  }
+  await messageBus.addMessage(new NoteUpdatedMessage(previousFields, note));
 
   return note;
 }
@@ -141,7 +148,7 @@ export async function remove(id: Note['id']) {
 
   logger.info({ id }, `${Note.name} removed`);
 
-  await removeNoteExpireJobs(id);
+  await messageBus.addMessage(new NoteRemovedMessage(id));
 }
 
 export async function changeStatus(
@@ -171,6 +178,8 @@ export async function changeStatus(
     `${Note.name} status updated`,
   );
 
+  await messageBus.addMessage(new NoteStatusChangedMessage(previousStatus, note));
+
   return note;
 }
 
@@ -187,6 +196,8 @@ export async function expireNote(note: Note) {
   );
 
   logger.info({ id: note.id }, 'Note expired');
+
+  await messageBus.addMessage(new NoteExpiredMessage(note));
 }
 
 export async function exampleError(id: Note['id']) {

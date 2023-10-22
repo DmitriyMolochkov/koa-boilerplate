@@ -3,18 +3,16 @@ import 'dotenv/config';
 
 import { DataSource } from '#database';
 import { BullProcessor, JobType } from '#job-queue';
+import * as NoteService from '#modules/notes/services';
 
 const processor: BullProcessor<JobType.expireNote> = async (job) => {
-  // eslint-disable-next-line node/no-unsupported-features/es-syntax,import/no-cycle
-  const noteService = await import('#modules/notes/services');
-
   if (!DataSource.isInitialized) {
     throw new Error('Database not initialized');
   }
 
-  const note = await noteService.getById(job.data.id);
+  const note = await NoteService.getById(job.data.id);
 
-  await noteService.expireNote(note);
+  await NoteService.expireNote(note);
 
   return {
     id: note.id,

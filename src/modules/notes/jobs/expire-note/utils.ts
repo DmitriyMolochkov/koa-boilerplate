@@ -4,7 +4,6 @@ import jobQueue, { JobType } from '#job-queue';
 import logger from '#logger';
 import Note from '#modules/notes/entities/Note';
 
-// eslint-disable-next-line import/no-cycle
 import { noteExpireJobOptions } from './options';
 
 export async function addNoteExpireJob(noteToExpire: Note) {

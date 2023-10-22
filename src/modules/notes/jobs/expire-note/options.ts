@@ -1,7 +1,6 @@
 import { IBullOptions, JobType } from '#job-queue';
 import logger from '#logger';
 
-// eslint-disable-next-line import/no-cycle
 import { expireNoteProcessorPath } from './processor';
 
 export const noteExpireJobOptions: IBullOptions<JobType.expireNote> = {
