@@ -16,6 +16,7 @@
     "#job-queue": "./src/job-queue",
     "#logger": "./src/logger",
     "#managers": "./src/managers",
+    "#message-bus": "./src/message-bus",
     "#mixins": "./src/mixins",
     "#modules/*": "./src/modules/*",
     "#redis": "./src/redis",

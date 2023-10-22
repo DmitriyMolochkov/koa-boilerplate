@@ -7,6 +7,7 @@ import {
 import { KeepJobs } from 'bullmq/dist/esm/interfaces';
 
 import logger from '#logger';
+import { errorToObject } from '#utils';
 
 import {
   IBullFlowJobOptions,
@@ -65,6 +66,10 @@ export function buildJobFlowOption(
   };
 }
 
+export function hideContentIfNeeded<T>(content: T, haveSensitiveData: boolean) {
+  return haveSensitiveData ? '[HIDDEN]' : content;
+}
+
 export function handleWorkerEvents<
   DataType = unknown,
   ResultType = unknown,
@@ -82,7 +87,7 @@ export function handleWorkerEvents<
         type,
         name: job.name,
         id: job.id,
-        payload: haveSensitiveData ? undefined : job.data,
+        payload: hideContentIfNeeded(job.data, haveSensitiveData),
       },
       'Job is active',
     );
@@ -93,8 +98,8 @@ export function handleWorkerEvents<
         type,
         name: job.name,
         id: job.id,
-        payload: haveSensitiveData ? undefined : job.data,
-        result: haveSensitiveData ? undefined : result,
+        payload: hideContentIfNeeded(job.data, haveSensitiveData),
+        result: hideContentIfNeeded(result, haveSensitiveData),
       },
       'Job completed',
     );
@@ -108,11 +113,9 @@ export function handleWorkerEvents<
             type,
             name: job.name,
             id: job.id,
-            payload: haveSensitiveData ? undefined : job.data,
-            error: handlerError instanceof Error ? {
-              message: handlerError.message,
-              stack: handlerError.stack,
-            } : handlerError,
+            payload: hideContentIfNeeded(job.data, haveSensitiveData),
+            result: hideContentIfNeeded(result, haveSensitiveData),
+            error: errorToObject(handlerError),
           },
           'Cannot run complete handler for completed job',
         );
@@ -125,7 +128,7 @@ export function handleWorkerEvents<
         type,
         name: job?.name,
         id: job?.id,
-        payload: haveSensitiveData ? undefined : job?.data,
+        payload: hideContentIfNeeded(job?.data, haveSensitiveData),
         error: {
           message: error.message,
           stack: error.stack,
@@ -143,11 +146,8 @@ export function handleWorkerEvents<
             type,
             name: job.name,
             id: job.id,
-            payload: haveSensitiveData ? undefined : job.data,
-            error: handlerError instanceof Error ? {
-              message: handlerError.message,
-              stack: handlerError.stack,
-            } : handlerError,
+            payload: hideContentIfNeeded(job.data, haveSensitiveData),
+            error: errorToObject(handlerError),
           },
           'Cannot run error handler for job failure',
         );
@@ -179,7 +179,7 @@ export function handleQueueEvents<JobT extends JobType>(
         type,
         name: job.name,
         id: job.id,
-        payload: haveSensitiveData ? undefined : job.data,
+        payload: hideContentIfNeeded(job.data, haveSensitiveData),
       },
       'Job removed from queue',
     );

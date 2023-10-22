@@ -13,6 +13,7 @@ import {
 import { serverConfig } from '#config';
 import logger from '#logger';
 import redis from '#redis';
+import { errorToObject } from '#utils';
 
 import { IBullFlowJobOptions, IBullOptions, IRepeatableBullOptions } from './interfaces';
 import { JobType } from './JobType';
@@ -29,6 +30,7 @@ import {
   handleQueueEvents,
   handleQueueEventsEvents,
   handleWorkerEvents,
+  hideContentIfNeeded,
 } from './utils';
 
 interface Section<JobT extends JobType> {
@@ -38,7 +40,7 @@ interface Section<JobT extends JobType> {
 }
 
 class JobQueue {
-  private jobRedisPrefix = `bull-${serverConfig.domain}`;
+  private jobRedisPrefix = `${serverConfig.domain}:bull-queue`;
 
   public queues: { [JobT in JobType]?: BullQueue<JobT> } = {};
   private workers: { [JobT in JobType]?: BullWorker<JobT> } = {};
@@ -95,10 +97,7 @@ class JobQueue {
         logger.error(
           {
             type,
-            error: error instanceof Error ? {
-              message: error.message,
-              stack: error.stack,
-            } : error,
+            error: errorToObject(error),
           },
           'Cannot add repeatable job',
         );
@@ -252,11 +251,8 @@ class JobQueue {
       logger.error(
         {
           type,
-          payload: haveSensitiveData ? undefined : payload,
-          error: error instanceof Error ? {
-            message: error.message,
-            stack: error.stack,
-          } : error,
+          payload: hideContentIfNeeded(payload, haveSensitiveData ?? false),
+          error: errorToObject(error),
         },
         'Cannot create job',
       );

@@ -23,7 +23,7 @@ const options: IRepeatableBullOptions<JobType.addJobsForNoteExpiration> = {
   },
   job: {
     repeat: {
-      pattern: '*/60 * * * * *',
+      pattern: '0 */5 * * * *', // every 5 minutes
     },
   },
 };

@@ -2,8 +2,8 @@ import { Server } from 'http';
 import * as util from 'util';
 
 import { DataSource } from '#database';
-import jobQueue from '#job-queue';
 import logger from '#logger';
+import { jobQueueManager } from '#managers';
 import redis from '#redis';
 
 const signals = ['SIGTERM', 'SIGINT', 'SIGUSR2'];
@@ -14,7 +14,7 @@ async function shutdownServer(server: Server) {
 
     const isRedisReady = redis.status === 'ready';
 
-    await jobQueue.terminate(!isRedisReady);
+    await jobQueueManager.terminate(!isRedisReady);
 
     if (isRedisReady) {
       await redis.quit();

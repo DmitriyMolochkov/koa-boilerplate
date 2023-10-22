@@ -3,6 +3,7 @@ import { ReasonPhrases, StatusCodes } from 'http-status-codes';
 
 import config from '#config';
 import logger from '#logger';
+import { errorToObject } from '#utils';
 
 export const serverErrorHandler: Middleware = async (ctx, next) => {
   try {
@@ -17,10 +18,7 @@ export const serverErrorHandler: Middleware = async (ctx, next) => {
     }
 
     if (error instanceof Error) {
-      ctx.body = {
-        message: error.message,
-        stack: error.stack,
-      };
+      ctx.body = errorToObject(error);
     } else {
       ctx.body = error;
     }

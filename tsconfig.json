@@ -37,6 +37,7 @@
       "#job-queue": ["./src/job-queue"],
       "#logger": ["./src/logger"],
       "#managers": ["./src/managers"],
+      "#message-bus": ["./src/message-bus"],
       "#mixins": ["./src/mixins"],
       "#modules/*": ["./src/modules/*"],
       "#redis": ["./src/redis"],
@@ -45,7 +46,7 @@
     // "rootDirs": ["src"],                              /* Allow multiple folders to be treated as one when resolving modules. */
     "typeRoots" : [                                      /* Specify multiple folders that act like './node_modules/@types'. */
       "./node_modules/@types",
-      "./@types",
+      "./@types"
     ],
     // "types": [],                                      /* Specify type package names to be included without being referenced in a source file. */
     // "allowUmdGlobalAccess": true,                     /* Allow accessing UMD globals from modules. */
@@ -115,7 +116,7 @@
     // "noImplicitOverride": true,                       /* Ensure overriding members in derived classes are marked with an override modifier. */
     "noPropertyAccessFromIndexSignature": true,          /* Enforces using indexed accessors for keys declared using an indexed type. */
     // "allowUnusedLabels": true,                        /* Disable error reporting for unused labels. */
-    "allowUnreachableCode": false,                       /* Disable error reporting for unreachable code. */
+    "allowUnreachableCode": false                       /* Disable error reporting for unreachable code. */
 
     /* Completeness */
     // "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */

@@ -5,11 +5,11 @@ import { BaseJobOptions, DefaultJobOptions } from 'bullmq/dist/esm/interfaces/ba
 import { JobType } from './JobType';
 import { JobModel } from './types';
 
-export interface IBullWorkerOptions<Payload = unknown, ReturnType = unknown> {
+export interface IBullWorkerOptions<Payload = unknown, ReturnData = unknown> {
   readonly concurrency?: WorkerOptions['concurrency'];
-  readonly processor: string | Processor<Payload, ReturnType>;
-  readonly completeHandler?: (job: Job<Payload, ReturnType>, result: ReturnType) => Promise<void>;
-  readonly errorHandler?: (job: Job<Payload, ReturnType>, error: Error) => Promise<void>;
+  readonly processor: string | Processor<Payload, ReturnData>;
+  readonly completeHandler?: (job: Job<Payload, ReturnData>, result: ReturnData) => Promise<void>;
+  readonly errorHandler?: (job: Job<Payload, ReturnData>, error: Error) => Promise<void>;
 }
 
 export interface IBullJobRemoveOptions {
@@ -41,7 +41,7 @@ export interface IBullFlowJobOptions<JobT extends JobType = JobType> extends IBu
 export interface IBullOptions<JobT extends JobType> {
   readonly type: JobT;
   readonly haveSensitiveData?: boolean;
-  readonly worker: IBullWorkerOptions<JobModel<JobT>['payload'], JobModel<JobT>['returnType']>;
+  readonly worker: IBullWorkerOptions<JobModel<JobT>['payload'], JobModel<JobT>['returnData']>;
   readonly job: IBullJobOptions;
 }
 
@@ -49,5 +49,5 @@ export interface IRepeatableBullOptions<JobT extends JobType> {
   readonly type: JobT;
   readonly haveSensitiveData?: boolean;
   readonly job: IBullRepeatableJobOptions;
-  readonly worker: IBullWorkerOptions<JobModel<JobT>['payload'], JobModel<JobT>['returnType']>;
+  readonly worker: IBullWorkerOptions<JobModel<JobT>['payload'], JobModel<JobT>['returnData']>;
 }

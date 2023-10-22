@@ -1,6 +1,5 @@
 import { serverConfig } from '#config';
 import { DataSource } from '#database';
-import jobQueue from '#job-queue';
 import logger from '#logger';
 import { jobQueueManager } from '#managers';
 import redis from '#redis';
@@ -19,7 +18,8 @@ export default async function start() {
     }
 
     await jobQueueManager.init();
-    jobQueue.start()
+
+    jobQueueManager.start()
       .catch((error) => {
         logger.error(error, 'Error in job queue');
         process.exit(-1);
@@ -37,6 +37,6 @@ export default async function start() {
     );
   } catch (error) {
     logger.error(error, 'Error while starting the server');
-    process.exitCode = 1;
+    process.exit(1);
   }
 }

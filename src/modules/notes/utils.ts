@@ -1,5 +1,6 @@
 import { HOURS_UNTIL_NEAR_NOTE_EXPIRATION } from '#modules/notes/constants';
 import Note from '#modules/notes/entities/Note';
+import { NoteStatus } from '#modules/notes/enums';
 
 export function getDateToNearNoteExpiration() {
   const targetDate = new Date();
@@ -9,7 +10,8 @@ export function getDateToNearNoteExpiration() {
 }
 
 export function isNoteNearExpiration(note: Note) {
-  const result = note.expirationDate < getDateToNearNoteExpiration();
+  const result = note.status !== NoteStatus.expired
+    && note.expirationDate < getDateToNearNoteExpiration();
 
   return result;
 }

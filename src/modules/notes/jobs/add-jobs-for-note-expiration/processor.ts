@@ -43,6 +43,7 @@ const processor: BullProcessor<JobType.addJobsForNoteExpiration> = async () => {
     count: noteIds.length,
   };
 };
+
 export default processor;
 
 export const addJobsForNoteExpirationProcessorPath = import.meta.url;

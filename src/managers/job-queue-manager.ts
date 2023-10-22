@@ -15,6 +15,14 @@ class JobQueueManager {
     await jobQueue.initRepeatableJobs(this.repeatableBullOptions);
     await jobQueue.initJobs(this.bullOptions);
   }
+
+  public async start() {
+    await jobQueue.start();
+  }
+
+  public async terminate(isForce?: boolean) {
+    await jobQueue.terminate(isForce);
+  }
 }
 
 export default new JobQueueManager();
