@@ -142,7 +142,7 @@ export async function claimMessages<JustId extends boolean>({
     minIdleTimeMs,
     ...messageIds,
     ...additionalArgs,
-  ) as JustId extends true ? string[] : StreamRawRedisMessage;
+  );
 
   if (justId) {
     return rawMessage as ReturnClaimMessagesData<JustId>;
