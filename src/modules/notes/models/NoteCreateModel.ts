@@ -9,7 +9,7 @@ import {
 } from 'class-validator';
 
 import { IsNullable, IsTrimmedString } from '#class-validator';
-import { ASCII_CYRILLIC_REG_EXP } from '#constants';
+import { TEXT_REG_EXP, TITLE_REG_EXP } from '#constants';
 import { LogExclude } from '#logger';
 
 import {
@@ -22,13 +22,13 @@ import {
 
 export class NoteCreateModel {
   @IsTrimmedString()
-  @Matches(ASCII_CYRILLIC_REG_EXP)
+  @Matches(TITLE_REG_EXP)
   @Length(MIN_TITLE_LENGTH, MAX_TITLE_LENGTH)
   public readonly title!: string;
 
   @IsNullable()
   @IsTrimmedString()
-  @Matches(ASCII_CYRILLIC_REG_EXP)
+  @Matches(TITLE_REG_EXP)
   @Length(MIN_DESCRIPTION_LENGTH, MAX_DESCRIPTION_LENGTH)
   public readonly description!: string | null;
 
@@ -43,7 +43,7 @@ export class NoteCreateModel {
 
   @LogExclude()
   @IsTrimmedString()
-  @Matches(ASCII_CYRILLIC_REG_EXP)
+  @Matches(TEXT_REG_EXP)
   @MaxLength(MAX_TEXT_LENGTH)
   public readonly text!: string;
 }

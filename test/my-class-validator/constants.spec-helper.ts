@@ -1,4 +1,5 @@
-export const ASCII_CYRILLIC_REG_EXP = /^[ -~№А-яЁё]+$/g;
+export const TITLE_REG_EXP = /^[\p{L}\p{M}\p{N}\p{P}\p{Sm}\p{Sc}\p{Sk}\p{Zs}№]+$/gu;
+export const TEXT_REG_EXP = /^[\p{L}\p{M}\p{N}\p{P}\p{S}\p{Z}\p{C}]+$/gu;
 export const PASSWORD_REG_EXP = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).+$/;
 export const MIN_PASSWORD_LENGTH = 8;
 export const MAX_PASSWORD_LENGTH = 128;
